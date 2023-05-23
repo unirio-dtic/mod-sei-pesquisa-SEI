@@ -74,7 +74,8 @@ class MdPesqAtualizadorSipRN extends InfraRN
             //checando BDs suportados
             if (!(BancoSip::getInstance() instanceof InfraMySql) &&
                 !(BancoSip::getInstance() instanceof InfraSqlServer) &&
-                !(BancoSip::getInstance() instanceof InfraOracle)) {
+                !(BancoSip::getInstance() instanceof InfraOracle) &&
+                !(BancoSip::getInstance() instanceof InfraPostgreSql)) {
 
                 $this->finalizar('BANCO DE DADOS NÃO SUPORTADO: ' . get_parent_class(BancoSip::getInstance()), true);
             }

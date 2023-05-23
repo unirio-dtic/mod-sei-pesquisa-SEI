@@ -75,7 +75,8 @@ class MdPesqAtualizadorSeiRN extends InfraRN
             //checando BDs suportados
             if (!(BancoSEI::getInstance() instanceof InfraMySql) &&
                 !(BancoSEI::getInstance() instanceof InfraSqlServer) &&
-                !(BancoSEI::getInstance() instanceof InfraOracle)) {
+                !(BancoSEI::getInstance() instanceof InfraOracle) &&
+                !(BancoSEI::getInstance() instanceof InfraPostgreSql)) {
                 $this->finalizar('BANCO DE DADOS NÃO SUPORTADO: ' . get_parent_class(BancoSEI::getInstance()), true);
             }
 
