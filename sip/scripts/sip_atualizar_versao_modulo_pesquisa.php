@@ -82,11 +82,18 @@ class MdPesqAtualizadorSipRN extends InfraRN
 
             //testando versao do framework
             $numVersaoInfraRequerida = '1.600.0';
-            $versaoInfraFormatada = (int)str_replace('.', '', VERSAO_INFRA);
-            $versaoInfraReqFormatada = (int)str_replace('.', '', $numVersaoInfraRequerida);
+            $versaoInfraArray = explode('.', VERSAO_INFRA);
+            $versaoInfraReqArray = explode('.', $numVersaoInfraRequerida);
 
-            if ($versaoInfraFormatada < $versaoInfraReqFormatada) {
-                $this->finalizar('VERSÃO DO FRAMEWORK PHP INCOMPATÍVEL (VERSÃO ATUAL ' . VERSAO_INFRA . ', SENDO REQUERIDA VERSÃO IGUAL OU SUPERIOR A ' . $numVersaoInfraRequerida . ')', true);
+            foreach($versaoInfraArray as $k => $vInfra) {
+                if ((int)$vInfra > (int)$versaoInfraReqArray[$k]) {
+                    break;
+                } elseif ((int)$vInfra == (int)$versaoInfraReqArray[$k]) {
+                    continue;
+                } else {
+                    $this->finalizar('VERSÃO DO FRAMEWORK PHP INCOMPATÍVEL (VERSÃO ATUAL ' . VERSAO_INFRA . ', SENDO REQUERIDA VERSÃO IGUAL OU SUPERIOR A ' . $numVersaoInfraRequerida . ')', true);
+                    break;
+                }
             }
 
             //checando permissoes na base de dados
